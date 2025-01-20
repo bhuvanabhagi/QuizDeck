@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import CreateQuiz from "./pages/CreateQuiz";
+import TakeQuiz from "./pages/TakeQuiz";
+import Leaderboard from "./pages/Leaderboard";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [quizzes, setQuizzes] = useState([]); // State to store quizzes
+
+  // Function to add a new quiz
+  const addQuiz = (quiz) => {
+    setQuizzes((prevQuizzes) => [...prevQuizzes, quiz]); // Add the new quiz to the list
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* Navbar */}
+      <nav className="navbar">
+        <h1 className="navbar-title">QuizMaster</h1>
+        <div className="navbar-links">
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/create-quiz" className="nav-link">Create Quiz</Link>
+          <Link to="/take-quiz" className="nav-link">Take Quiz</Link>
+          <Link to="/leaderboard" className="nav-link">Leaderboard</Link>
+        </div>
+      </nav>
+
+      {/* Main content */}
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<h2>Welcome to QuizMaster! Start exploring quizzes now!</h2>} />
+          <Route path="/create-quiz" element={<CreateQuiz addQuiz={addQuiz} />} />
+          <Route path="/take-quiz" element={<TakeQuiz quizzes={quizzes} />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+        </Routes>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
