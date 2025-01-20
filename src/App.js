@@ -3,6 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import CreateQuiz from "./pages/CreateQuiz";
 import TakeQuiz from "./pages/TakeQuiz";
 import Leaderboard from "./pages/Leaderboard";
+import Home from "./pages/Home"; // Import the new Home component
 import "./App.css";
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
       {/* Main content */}
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<h2>Welcome to QuizMaster! Start exploring quizzes now!</h2>} />
+          <Route path="/" element={<Home quizzes={quizzes} />} /> {/* Updated Home Route */}
           <Route path="/create-quiz" element={<CreateQuiz addQuiz={addQuiz} />} />
           <Route path="/take-quiz" element={<TakeQuiz quizzes={quizzes} />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
